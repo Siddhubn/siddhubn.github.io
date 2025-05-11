@@ -44,19 +44,7 @@
     <span class="beacon-icon"> i </span>
     <span class="beacon-text">Access Point</span>
 </a>
-    
-<section id="patriot" class="patriot-section">
-    
-  <div class="text-animate">
-    <h2><span class="typed-text"></span><span class="cursor">&nbsp;</span></h2>
-  </div>
 
-  <div class="india-map">
-    <img src="imgs/indian-flag.jpg" alt="India Map">
-  </div>
-
-  <canvas id="tricolor-canvas"></canvas>
-</section>
 
     <section id="gallery">
         <h2>Highlights from My Journey</h2>
@@ -1167,76 +1155,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Typing animation
-const phrases = ["I Love My Country", "जय हिंद 🇮🇳", "Proud to be Indian"];
-let currentPhrase = 0;
-let currentChar = 0;
-let isDeleting = false;
-const typedText = document.querySelector(".typed-text");
-
-function type() {
-  const text = phrases[currentPhrase];
-  if (isDeleting) {
-    currentChar--;
-    if (currentChar <= 0) {
-      isDeleting = false;
-      currentPhrase = (currentPhrase + 1) % phrases.length;
-    }
-  } else {
-    currentChar++;
-    if (currentChar >= text.length) {
-      isDeleting = true;
-    }
-  }
-
-  typedText.textContent = text.substring(0, currentChar);
-  setTimeout(type, isDeleting ? 50 : 100);
-}
-type();
-
-// Tricolor particles using canvas
-const canvas = document.getElementById('tricolor-canvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const colors = ['#FF9933', '#FFFFFF', '#138808'];
-let particles = [];
-
-function Particle() {
-  this.x = Math.random() * canvas.width;
-  this.y = Math.random() * canvas.height;
-  this.radius = Math.random() * 2 + 1;
-  this.color = colors[Math.floor(Math.random() * colors.length)];
-  this.speedY = Math.random() * 0.5 + 0.5;
-
-  this.draw = function() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    ctx.fillStyle = this.color;
-    ctx.fill();
-  };
-
-  this.update = function() {
-    this.y += this.speedY;
-    if (this.y > canvas.height) this.y = 0;
-    this.draw();
-  };
-}
-
-function initParticles() {
-  particles = [];
-  for (let i = 0; i < 300; i++) {
-    particles.push(new Particle());
-  }
-}
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach(p => p.update());
-  requestAnimationFrame(animateParticles);
-}
-initParticles();
-animateParticles();
 </script>
 
 </body>
